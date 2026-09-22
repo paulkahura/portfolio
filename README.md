@@ -1,4 +1,4 @@
-# Paul Kahura / Personal Workstation
+# Koimburi / Personal Workstation
 
 A React, TypeScript, and Vite portfolio presented as an accessible HTML interface inside a CSS CRT monitor. No WebGL or external services are required.
 

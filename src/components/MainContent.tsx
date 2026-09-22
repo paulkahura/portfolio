@@ -94,7 +94,7 @@ export function MainContent() {
     window.scrollTo(0, 0);
     if (!firstLoad.current) heading.current?.focus({ preventScroll: true });
     firstLoad.current = false;
-    document.title = `${project?.name || post?.title || (section ? labels[section] : "Software Engineer")} | Paul Kahura`;
+    document.title = `${project?.name || post?.title || (section ? labels[section] : "Software Engineer")} | Koimburi`;
   }, [location.key, project?.name, post?.title, section]);
 
   const go = (value?: Section) => {
@@ -135,7 +135,7 @@ export function MainContent() {
       return;
     }
     if (value === "whoami") {
-      setFeedback("PAUL KAHURA / SOFTWARE ENGINEER / BUILDER / CURIOUS HUMAN");
+      setFeedback("KOIMBURI / SOFTWARE ENGINEER / BUILDER / CURIOUS HUMAN");
       return;
     }
     if (value === "status" || value === "ver" || value === "version") {
@@ -193,14 +193,14 @@ export function MainContent() {
       </a>
       <header className="desk-header">
         <span>
-          <span className="tiny-cross">+</span> PAUL KAHURA / PERSONAL
+          <span className="tiny-cross">+</span> KOIMBURI / PERSONAL
           WORKSTATION
         </span>
         <span>
           NAIROBI, KE <span className="desk-dot" />
         </span>
       </header>
-      <main className="monitor" aria-label="Paul Kahura portfolio">
+      <main className="monitor" aria-label="Koimburi portfolio">
         <div className={`screen-bezel ${!powered ? "is-asleep" : ""}`}>
           <div className={`crt-glass ${scanlines ? "has-scanlines" : ""}`}>
             {powered ? (
@@ -433,7 +433,7 @@ export function MainContent() {
       <div className="monitor-foot" aria-hidden="true" />
       <footer className="desk-footer">
         <span>BUILT IN THE PRESENT. A NOD TO THE PAST.</span>
-        <span>&copy; {new Date().getFullYear()} PAUL KAHURA</span>
+        <span>&copy; {new Date().getFullYear()} KOIMBURI</span>
       </footer>
     </div>
   );

@@ -55,7 +55,7 @@ export function PortfolioSection({
         </p>
         <div className="prose">
           <p>
-            I'm Paul Koimburi Kahura, a software engineer and venture builder
+            I'm Koimburi, a software engineer and venture builder
             based in Kiambu County, Kenya. I work across full-stack
             applications, mobile products, AI integrations, and cloud
             infrastructure.
@@ -269,7 +269,7 @@ export function PortfolioSection({
         <div className="resume-file">
           <span className="file-extension">PDF</span>
           <div>
-            <h2>Paul Koimburi Kahura</h2>
+            <h2>Koimburi</h2>
             <p>
               Senior Software Engineer
               <br />
@@ -343,7 +343,7 @@ export function PortfolioSection({
             rel="noreferrer"
           >
             <Linkedin size={20} />
-            <span>LinkedIn / Paul Kahura</span>
+            <span>LinkedIn / Koimburi</span>
             <ArrowUpRight size={18} />
           </a>
         </div>

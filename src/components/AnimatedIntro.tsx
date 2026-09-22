@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { Ref } from "react";
 import { Pause, Play } from "lucide-react";
 
-const name = "Paul Kahura";
+const name = "Koimburi";
 const descriptions = [
   "Fact: I am a software engineer and venture builder based in Kiambu County, Kenya.",
   "Fact: I build across mobile apps, AI systems, data platforms, and cloud infrastructure.",
