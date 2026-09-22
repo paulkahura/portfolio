@@ -3,6 +3,8 @@ import react from "@vitejs/plugin-react";
 import { copyFileSync } from "node:fs";
 import { resolve } from "node:path";
 
+const base = process.env.VITE_BASE_PATH || "/portfolio/";
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -16,5 +18,5 @@ export default defineConfig({
       },
     },
   ],
-  base: "/portfolio/",
+  base,
 });
