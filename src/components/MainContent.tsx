@@ -22,6 +22,8 @@ import type { Section } from "../data/portfolio";
 import { PortfolioSection } from "./PortfolioSection";
 import { CrtLens } from "./CrtLens";
 import { AnimatedIntro } from "./AnimatedIntro";
+import { arcadeGames } from "../data/arcade";
+import type { ArcadeGame } from "../data/arcade";
 
 const labels: Record<Section, string> = {
   about: "About me",
@@ -50,6 +52,8 @@ export function MainContent() {
   const requestedSection = params.get("section");
   const section = sections.find((value) => value === requestedSection);
   const projectId = params.get("project");
+  const requestedGame = params.get("game");
+  const game = arcadeGames.find((value) => value === requestedGame);
   const project =
     section === "projects"
       ? projects.find((value) => value.id === projectId)
@@ -58,7 +62,8 @@ export function MainContent() {
   const missing =
     (location.pathname !== "/" && !post) ||
     (!!requestedSection && !section) ||
-    (section === "projects" && !!projectId && !project);
+    (section === "projects" && !!projectId && !project) ||
+    (section === "games" && !!requestedGame && !game);
   const isHome = !section && !id && !missing;
   const displayPath = [
     "C:",
@@ -99,12 +104,19 @@ export function MainContent() {
     navigate(value ? `/?section=${value}` : "/");
   };
 
+  const play = (value: ArcadeGame) => {
+    setFeedback("");
+    setCommand("");
+    setBooting(false);
+    navigate(`/?section=games&game=${value}`);
+  };
+
   function submitCommand(event: FormEvent) {
     event.preventDefault();
     const value = command.trim().toLowerCase();
     setCommand("");
     if (!value) return;
-    if (value === "home" || value === "clear") {
+    if (value === "home" || value === "clear" || value === "cls") {
       go();
       return;
     }
@@ -112,8 +124,49 @@ export function MainContent() {
       go(project ? "projects" : id ? "writing" : undefined);
       return;
     }
+    if (value === "help" || value === "?") {
+      setFeedback(
+        "Navigation: about, projects, experience, resume, contact, writing, games. System: dir, whoami, status, date, time, home, back. Arcade: play snake, play signal, play quiz.",
+      );
+      return;
+    }
+    if (value === "dir" || value === "ls") {
+      setFeedback(`DIRECTORIES: ${sections.join(" / ")}`);
+      return;
+    }
+    if (value === "whoami") {
+      setFeedback("PAUL KAHURA / SOFTWARE ENGINEER / BUILDER / CURIOUS HUMAN");
+      return;
+    }
+    if (value === "status" || value === "ver" || value === "version") {
+      setFeedback("TERMINAL 2.0 / CRT ONLINE / ALL SYSTEMS NOMINAL");
+      return;
+    }
+    if (value === "date") {
+      setFeedback(new Intl.DateTimeFormat("en-KE", { dateStyle: "full" }).format(new Date()));
+      return;
+    }
+    if (value === "time") {
+      setFeedback(new Intl.DateTimeFormat("en-KE", { timeStyle: "medium", timeZone: "Africa/Nairobi" }).format(new Date()));
+      return;
+    }
+    if (value === "sudo" || value.startsWith("sudo ")) {
+      setFeedback("NICE TRY. THIS WORKSTATION RUNS ON CURIOSITY, NOT ROOT ACCESS.");
+      return;
+    }
+    const gameCommand = arcadeGames.find(
+      (item) => value === item || value === `play ${item}` || value === `game ${item}`,
+    );
+    if (gameCommand) {
+      play(gameCommand);
+      return;
+    }
     const target = sections.find(
-      (item) => item === value || `open ${item}` === value,
+      (item) =>
+        item === value ||
+        `open ${item}` === value ||
+        (item === "projects" && (value === "work" || value === "portfolio")) ||
+        (item === "resume" && (value === "cv" || value === "open cv")),
     );
     if (target) {
       go(target);
@@ -128,9 +181,7 @@ export function MainContent() {
       return;
     }
     setFeedback(
-      value === "help"
-        ? `Commands: ${sections.join(", ")}, home, back.`
-        : `Command not found: ${value.slice(0, 50)}. Enter help for available commands.`,
+      `Command not found: ${value.slice(0, 50)}. Enter help for available commands.`,
     );
   }
 
@@ -287,6 +338,7 @@ export function MainContent() {
                         key={section}
                         section={section}
                         project={project}
+                        game={game}
                       />
                     </section>
                   ) : null}

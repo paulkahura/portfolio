@@ -1165,12 +1165,131 @@ small {
   font-size: 24px;
   margin-bottom: 10px;
 }
+.arcade-cabinet {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+.arcade-launcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 16px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+  font-size: 10px;
+  color: #80a68b;
+}
+.arcade-launcher a {
+  min-height: 30px;
+  display: inline-flex;
+  align-items: center;
+}
+.arcade-launcher a[aria-current="page"] {
+  color: #e0efb3;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
 .arcade {
   display: grid;
   grid-template-rows: 24px minmax(0, 1fr) 46px;
   gap: 8px;
   flex: 1;
   min-height: 0;
+}
+.mini-game {
+  grid-template-rows: 24px minmax(180px, 1fr) 46px;
+}
+.signal-pad {
+  border: 1px solid #52745b;
+  background: #091d10;
+  color: #b9e2bf;
+  width: min(100%, 620px);
+  justify-self: center;
+  align-self: stretch;
+  margin: 0 auto;
+  cursor: crosshair;
+  font-family: inherit;
+}
+.signal-pad:hover,
+.signal-pad:focus-visible {
+  border-color: #b7e6a1;
+  outline: none;
+}
+.signal-pad.go {
+  background: #30713c;
+  color: #efffd2;
+  box-shadow: 0 0 25px #7aff8b44 inset;
+}
+.signal-pad.early {
+  border-color: #ca9b6a;
+  color: #e7b775;
+}
+.signal-pad span {
+  display: block;
+  font-size: clamp(28px, 7vh, 58px);
+}
+.signal-pad small {
+  display: block;
+  margin: 12px auto 0;
+  max-width: 340px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.compact-controls {
+  min-height: 42px;
+}
+.compact-controls > span {
+  color: #84a88d;
+  font-size: 10px;
+}
+.quiz-panel {
+  width: min(100%, 650px);
+  justify-self: center;
+  align-self: stretch;
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px solid #52745b;
+  background: #091d10;
+}
+.quiz-prompt {
+  margin: 0 0 18px;
+  color: #d1f2cc;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.quiz-options {
+  display: grid;
+  gap: 7px;
+}
+.quiz-options button {
+  min-height: 42px;
+  border: 1px solid #35593d;
+  background: transparent;
+  color: #b8d8b7;
+  text-align: left;
+  padding: 8px 12px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.quiz-options button:hover:not(:disabled),
+.quiz-options button:focus-visible {
+  border-color: #b7e6a1;
+  color: #e8ffdc;
+  outline: none;
+}
+.quiz-options button span {
+  color: #83ac90;
+}
+.quiz-options button.correct {
+  border-color: #a9e892;
+  color: #e6ffda;
+}
+.quiz-options button.incorrect {
+  border-color: #ca9b6a;
+  color: #e7b775;
 }
 .arcade-bar {
   display: flex;

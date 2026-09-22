@@ -31,13 +31,13 @@ Company projects have summaries rather than source-code links. Zuka's provider a
 
 Sections use `?section=projects`; project details add `&project=zuka-safari`. Browser history and refreshed links preserve the selected view. Existing `/blog/:id` paths remain available. Unknown sections, projects, and article paths render a recovery view.
 
-The optional command prompt accepts section names (including `games`), `open <section>`, project IDs or names, `home`, `back`, `clear`, and `help`. Every destination is also accessible through links. Display controls toggle scanlines and standby. The monitor fits the viewport; long content scrolls only inside its screen, including on mobile.
+The optional command prompt accepts section names (including `games`), `open <section>`, project IDs or names, `home`, `back`, `clear`/`cls`, and `help`. It also understands `dir`/`ls`, `whoami`, `status`, `date`, `time`, and `play snake`, `play signal`, or `play quiz`. Every destination is also accessible through links. Display controls toggle scanlines and standby. The monitor fits the viewport; long content scrolls only inside its screen, including on mobile.
 
 The introduction types once, then cycles through five shuffled descriptions with a decryption effect. The pause control stops the description cycle. Reduced-motion preferences render static text. A generated SVG displacement map adds mild lens curvature to the HTML, with a CSS glass treatment and a custom pixel cursor.
 
-## Snake
+## Arcade
 
-The games section uses [snake-game-engine](https://github.com/lucabro81/snake-game-engine) for movement, growth, food, and collision rules. A small adapter provides a safe starting position, a cancellable timer, and React snapshots. Unit tests cover food/scoring, boundaries, reversal, pause/resume, and timer cleanup. `npm test` requires Node 22.18 or newer.
+The games section includes Snake, Signal Tap, and a Build Quiz. Snake uses [snake-game-engine](https://github.com/lucabro81/snake-game-engine) for movement, growth, food, and collision rules. A small adapter provides a safe starting position, a cancellable timer, and React snapshots. Signal Tap is a keyboard-friendly reflex challenge; Build Quiz turns portfolio browsing into a short arcade round. Unit tests cover Snake food/scoring, boundaries, reversal, pause/resume, and timer cleanup. `npm test` requires Node 22.18 or newer.
 
 Arrow keys or WASD steer while the canvas is focused; Space toggles play/pause and Escape pauses. Touch players can swipe the board or use the directional buttons. The game pauses when focus leaves it or the page becomes hidden. Best scores stay in local storage when available, and blocked storage does not prevent play.
 
@@ -53,7 +53,7 @@ The Vite base remains `/portfolio/`. The build creates `dist/404.html` as a copy
 - Visit all existing blog URLs and invalid section/project/article URLs.
 - Verify keyboard focus after navigation, reduced motion, scanlines, and standby recovery.
 - Verify the five-description animation, pause control, and stable text layout.
-- Play Snake with keyboard and touch; test scoring, restart, focus loss, and best-score persistence.
+- Play each arcade game with keyboard and touch; test Snake scoring, restart, focus loss, and best-score persistence.
 - Inspect 320px, 390px, 768px, 1440px, and 1920px layouts for overflow and asset loading.
 
 The redesign was checked with Chromium/Playwright against the local Vite server, including PDF downloading, clipboard copying, route history, missing-entry states, and desktop/mobile screenshots.

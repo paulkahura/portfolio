@@ -19,16 +19,19 @@ import {
   projects,
 } from "../data/portfolio";
 import type { Project, Section } from "../data/portfolio";
-import { SnakeGame } from "./SnakeGame";
+import { ArcadeCabinet } from "./ArcadeCabinet";
+import type { ArcadeGame } from "../data/arcade";
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}${path}`;
 
 export function PortfolioSection({
   section,
   project,
+  game,
 }: {
   section: Section;
   project?: Project;
+  game?: ArcadeGame;
 }) {
   const [copyStatus, setCopyStatus] = useState("");
 
@@ -41,7 +44,7 @@ export function PortfolioSection({
     }
   }
 
-  if (section === "games") return <SnakeGame />;
+  if (section === "games") return <ArcadeCabinet game={game} />;
 
   if (section === "about")
     return (
