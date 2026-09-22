@@ -96,18 +96,22 @@ export function MainContent() {
     let glitchTimer: number | undefined;
     let clearTimer: number | undefined;
 
-    const scheduleGlitch = () => {
-      const delay = 16_000 + Math.random() * 28_000;
+    const triggerGlitch = () => {
+      if (!document.hidden && powered) {
+        setGlitching(true);
+        clearTimer = window.setTimeout(() => setGlitching(false), 520);
+      }
+    };
+
+    const scheduleGlitch = (initial = false) => {
+      const delay = initial ? 2_800 : 12_000 + Math.random() * 18_000;
       glitchTimer = window.setTimeout(() => {
-        if (!document.hidden && powered) {
-          setGlitching(true);
-          clearTimer = window.setTimeout(() => setGlitching(false), 360);
-        }
+        triggerGlitch();
         scheduleGlitch();
       }, delay);
     };
 
-    scheduleGlitch();
+    scheduleGlitch(true);
     return () => {
       window.clearTimeout(glitchTimer);
       window.clearTimeout(clearTimer);

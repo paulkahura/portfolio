@@ -312,10 +312,10 @@ small {
   opacity: 0.55;
 }
 .crt-glass.is-glitching:after {
-  animation: crt-glitch-overlay 360ms steps(2, end);
+  animation: crt-glitch-overlay 520ms steps(2, end);
 }
 .crt-glass.is-glitching .screen-interface {
-  animation: crt-glitch-content 360ms steps(2, end);
+  animation: crt-glitch-content 520ms steps(2, end);
 }
 @keyframes crt-glitch-content {
   0%,
@@ -324,11 +324,11 @@ small {
     filter: url("#crt-lens");
   }
   18% {
-    transform: translateX(-3px) skewX(0.45deg);
-    filter: url("#crt-lens") hue-rotate(10deg);
+    transform: translateX(-5px) skewX(0.7deg);
+    filter: url("#crt-lens") hue-rotate(18deg) brightness(1.12);
   }
   44% {
-    transform: translateX(4px) skewX(-0.3deg);
+    transform: translateX(6px) skewX(-0.5deg);
   }
   62% {
     transform: translateX(-1px);
@@ -340,11 +340,12 @@ small {
     opacity: 1;
   }
   18%,
-  62% {
-    opacity: 0.45;
+  62%,
+  78% {
+    opacity: 0.78;
     background:
-      linear-gradient(transparent 14%, #c8ffdc26 15%, transparent 21%),
-      linear-gradient(transparent 57%, #001509c0 59%, transparent 64%),
+      linear-gradient(transparent 14%, #c8ffdc4d 15%, transparent 21%),
+      linear-gradient(transparent 57%, #001509e0 59%, transparent 64%),
       radial-gradient(ellipse at 50% 48%, transparent 45%, #07120922 72%, #0006 100%);
   }
 }
