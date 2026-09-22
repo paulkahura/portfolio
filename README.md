@@ -57,7 +57,7 @@ In Cloudflare, create a Pages project from `paulkahura/portfolio`, select the `m
 
 ## Browser verification checklist
 
-- Open all seven sections and four featured projects with both links and commands.
+- Open all seven sections and six featured projects with both links and commands.
 - Refresh a project URL, then use browser Back/Forward and the in-screen Back/Home controls.
 - Download the resume and verify its PDF contents; check email, GitHub, LinkedIn, and clipboard actions.
 - Visit all existing blog URLs and invalid section/project/article URLs.

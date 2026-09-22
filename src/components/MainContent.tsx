@@ -67,7 +67,7 @@ export function MainContent() {
   const isHome = !section && !id && !missing;
   const displayPath = [
     "C:",
-    "PAUL",
+    "KOIMBURI",
     section?.toUpperCase() || (id ? "WRITING" : ""),
     project?.id.toUpperCase(),
   ]
@@ -350,7 +350,7 @@ export function MainContent() {
                     </p>
                   )}
                   <form className="command-line" onSubmit={submitCommand}>
-                    <label htmlFor="command">C:\PAUL&gt;</label>
+                    <label htmlFor="command">C:\KOIMBURI&gt;</label>
                     <input
                       id="command"
                       aria-label="Terminal command"

@@ -272,6 +272,63 @@ export const projects: Project[] = [
     ],
     stack: ["Flutter", "Dart", "Firebase", "FFmpeg", "CallKit", "Web"],
   },
+  {
+    id: "mug-sacco",
+    name: "MUG SACCO",
+    audience: "SACCO members, branch staff, loan officers, and administrators",
+    challenge:
+      "A SACCO has to keep savings, loan decisions, transactions, member records, and accounting in agreement while serving people with very different responsibilities. A member needs a clear account view; staff need controlled workflows, reporting, and an audit trail behind every financial action.",
+    contribution:
+      "I built the platform across the member and staff mobile applications, the web back office, and the Django REST backend. The work connects savings and lending workflows with accounting records, role-aware operations, notifications, and payment-reconciliation paths.",
+    flow: [
+      "Member profile + KYC",
+      "Savings or loan request",
+      "Staff review",
+      "Ledger + schedule",
+      "Member notification",
+    ],
+    decisions: [
+      {
+        title: "Give members and operations teams the right view",
+        detail:
+          "The Flutter applications distinguish member and staff workflows, while a React and TypeScript dashboard gives the back office a focused place to manage members, savings, loans, transactions, accounting, reports, and audit history.",
+      },
+      {
+        title: "Treat financial events as accountable events",
+        detail:
+          "Loan and savings workflows create double-entry journal records, while role-based permissions and audit trails make the operational history reviewable. Payment callbacks are reconciled against member accounts instead of being treated as isolated messages.",
+      },
+    ],
+    takeaway:
+      "MUG brings the member experience and SACCO operations into one platform, with a structure designed for day-to-day financial work rather than a collection of disconnected spreadsheets and messages.",
+    category: "FINTECH / SACCO PLATFORM",
+    summary: "A member and operations platform for SACCO management.",
+    role: "Product architecture & full-stack development",
+    description:
+      "MUG is a SACCO management platform with Flutter member and staff apps, a React back-office dashboard, and a Django REST backend. It brings together member onboarding, savings, loans, transactions, accounting, reports, notifications, and operational controls.",
+    capabilities: [
+      "Member and staff experiences for savings, loan applications, account activity, and operational work.",
+      "A React and TypeScript back office for members, loans, transactions, accounting, reports, and audit trails.",
+      "Loan review, approvals, amortization schedules, guarantor records, and disbursement workflows.",
+      "Savings accounts, transaction records, double-entry journals, and M-Pesa payment-reconciliation paths.",
+      "Role-based access, local biometric support, secure storage, push notifications, and background tasks.",
+    ],
+    stack: [
+      "Flutter",
+      "Dart",
+      "React",
+      "TypeScript",
+      "Django REST",
+      "PostgreSQL",
+      "Redis + Celery",
+      "Firebase",
+    ],
+    image: {
+      path: "projects/mug-logo.png",
+      alt: "MUG SACCO product mark with growth arrows",
+      caption: "MUG SACCO / product identity",
+    },
+  },
 ];
 
 export interface Experience {
