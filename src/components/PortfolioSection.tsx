@@ -114,6 +114,7 @@ export function PortfolioSection({
           }
         >
           <div>
+            <h2 className="project-overview-heading">What it is</h2>
             <p>{project.description}</p>
             <h2>
               <span className="case-number">01</span> The problem

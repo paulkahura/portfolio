@@ -4,11 +4,11 @@ import { Pause, Play } from "lucide-react";
 
 const name = "Paul Kahura";
 const descriptions = [
-  "Software for real people, messy data, and moving buses.",
-  "Turning invoices into answers before the next meeting.",
-  "Teaching cameras to answer questions. Politely.",
-  "I write code. Then I negotiate with it.",
-  "Full stack. Occasionally full of coffee.",
+  "Fact: I am a software engineer and venture builder based in Kiambu County, Kenya.",
+  "Fact: I build across mobile apps, AI systems, data platforms, and cloud infrastructure.",
+  "Fact: My work has helped bring two startups to market with international reach.",
+  "Fact: I have built products for transport, healthcare operations, communications, and physical spaces.",
+  "Fact: I work with React, Flutter, Python, TypeScript, and AWS to take ideas into production.",
 ];
 const glyphs = "01<>/+#%*:_";
 const motionQuery = "(prefers-reduced-motion: reduce)";

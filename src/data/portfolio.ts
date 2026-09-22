@@ -34,15 +34,15 @@ export const projects: Project[] = [
     name: "Contrast / TIVTAV",
     audience: "Dental practices and multi-practice groups",
     challenge:
-      "Invoices arrive as documents, but the questions are about the business: what did we spend, with whom, and how does one practice compare with another? Making that information usable also means keeping each customer's data and credentials separate throughout the system.",
+      "Dental practices run on operational documents: invoices, payslips, contracts, receipts, bills of works, and more. The information inside them is essential to running a practice, but it is often locked in different formats and disconnected from the questions people need to answer. Making it useful also means keeping each customer's data and credentials separate throughout the system.",
     contribution:
-      "I worked across the platform architecture, cloud infrastructure, and document-to-analytics pipeline. That included dedicated tenant environments, infrastructure as code, onboarding automation, and the application layer that turns warehouse data into something people can actually explore.",
+      "I worked across the platform architecture, cloud infrastructure, and document-intelligence pipeline. That included dedicated tenant environments, infrastructure as code, onboarding automation, and the application layer that turns operational documents into data people can actually explore.",
     flow: [
-      "Invoice upload",
-      "AI extraction",
+      "Operational document upload",
+      "AI classification + extraction",
+      "Secure tenant pipeline",
       "Redshift + dbt",
-      "GraphQL",
-      "Practice analytics",
+      "Practice intelligence",
     ],
     decisions: [
       {
@@ -57,17 +57,17 @@ export const projects: Project[] = [
       },
     ],
     takeaway:
-      "The resulting workflow connects an uploaded supplier invoice to structured, queryable spend data and a practice-facing analytics experience.",
+      "The resulting workflow turns a practice's day-to-day documents into structured, queryable operational data and a practice-facing intelligence experience.",
     category: "CLOUD / DATA PLATFORM",
-    summary: "From documents to decisions. Tenant by tenant.",
+    summary: "A secure document-intelligence platform for dental practices.",
     role: "Platform architecture & engineering / Shockwolves BV, under Elewa",
     description:
-      "A document analytics platform for dental practices. Supplier invoices become structured data and operational insights, with dedicated infrastructure for each tenant and a React application backed by GraphQL.",
+      "TIVTAV is a secure document-intelligence platform for dental practices. It processes operational documents such as invoices, payslips, contracts, receipts, and bills of works, turning them into structured data and useful practice insights inside a dedicated environment for each tenant.",
     capabilities: [
       "Per-tenant AWS environments with dedicated networking, storage, identity, and data warehousing.",
       "Infrastructure as code and automated onboarding workflows.",
-      "AI document extraction with ExtendAI and transformations with dbt.",
-      "Invoice and spend analytics delivered through React and GraphQL.",
+      "AI classification and extraction for operational documents with ExtendAI and dbt transformations.",
+      "Practice intelligence delivered through React and GraphQL.",
     ],
     stack: [
       "AWS CDK",
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     takeaway:
       "Teams can move from understanding a situation to preparing and reviewing a response without treating every document as an isolated task.",
     category: "AI / COMMUNICATIONS",
-    summary: "Clarity when communication matters most.",
+    summary: "An AI workspace for teams handling crisis communications.",
     role: "AI crisis-platform engineering / Elewa",
     description:
       "A collaborative crisis communication platform that helps teams coordinate a response, draft communications with AI, and move content through structured approvals.",
@@ -168,7 +168,7 @@ export const projects: Project[] = [
     takeaway:
       "Camera activity becomes a stream of events that can be counted, queried, and surfaced as notifications. The useful output is an answer, not another hour of footage.",
     category: "COMPUTER VISION / AI",
-    summary: "Turn camera feeds into useful signals.",
+    summary: "A computer-vision platform for searchable camera activity.",
     role: "Architecture & development / Three Point Devhub",
     description:
       "An AI surveillance analytics system that connects camera feeds to actionable WhatsApp alerts. Built to make camera activity useful to people managing stores, offices, and other physical spaces.",
@@ -211,7 +211,7 @@ export const projects: Project[] = [
     takeaway:
       "A connected passenger-and-driver experience makes the transport network easier to discover and manage, with an architecture that can accommodate additional data sources.",
     category: "MOBILITY / MOBILE",
-    summary: "A better way to move through Nairobi.",
+    summary: "A real-time public transport platform for Nairobi.",
     role: "Product architecture & full-stack development",
     description:
       "A public transport tracking and aggregation platform built around the way Nairobi moves. Separate passenger and driver apps bring vehicle locations, routes, fares, and trip management into one connected experience.",
@@ -259,7 +259,7 @@ export const projects: Project[] = [
     takeaway:
       "Socio turns profile discovery into a richer conversation starter, pairing a video-first mobile experience with the web and operational tools that help the product stay manageable behind the scenes.",
     category: "SOCIAL / MOBILE + WEB",
-    summary: "Short videos. Real conversations. Less profile-card theatre.",
+    summary: "A video-led social discovery platform for mobile and web.",
     role: "Mobile + web product development",
     description:
       "A video-led social discovery platform built as a Flutter mobile application alongside companion web and admin experiences. People can introduce themselves with short videos, discover one another, connect, and continue the conversation through messaging and calls.",
