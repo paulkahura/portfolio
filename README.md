@@ -45,7 +45,7 @@ Arrow keys or WASD steer while the canvas is focused; Space toggles play/pause a
 
 The Vite base remains `/portfolio/`. The build creates `dist/404.html` as a copy of the application shell so GitHub Pages can render direct visits to legacy blog paths. GitHub Pages still returns HTTP 404 for those fallback requests; query-based section links return normally. No deployment happens during a build.
 
-### Cloudflare Pages / koimburi.dev
+### Cloudflare Workers / koimburi.dev
 
 The repository supports a root-domain build without disrupting GitHub Pages:
 
@@ -53,7 +53,7 @@ The repository supports a root-domain build without disrupting GitHub Pages:
 npm run build:cloudflare
 ```
 
-In Cloudflare, create a Pages project from `paulkahura/portfolio`, select the `main` branch, use `npm run build:cloudflare` as the build command, and set `dist` as the build output directory. Then add `koimburi.dev` and `www.koimburi.dev` in **Workers & Pages > portfolio > Custom domains**. Because the domain is already managed by Cloudflare, it will create the required records and issue HTTPS certificates after the domains are activated. The included `_redirects` file makes direct links to the portfolio and blog views resolve to the React application.
+In Cloudflare Workers Builds, connect `paulkahura/portfolio` on the `main` branch. Use `npm run build:cloudflare` as the build command and `npx wrangler deploy` as the deploy command. Leave Root directory and the optional build token empty. The committed `wrangler.jsonc` deploys the generated `dist` directory as static assets and provides SPA fallback handling. After the first successful deploy, add `koimburi.dev` and `www.koimburi.dev` in the Worker's **Settings > Domains & Routes**. Because the domain is already managed by Cloudflare, it will create the required records and issue HTTPS certificates after the domains are activated.
 
 ## Browser verification checklist
 
