@@ -354,7 +354,7 @@ small {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 30px 30px 22px;
+  padding: 30px 30px 34px;
   filter: url("#crt-lens");
   text-shadow: 0 0 8px #80da9430;
 }
@@ -1496,7 +1496,7 @@ small {
     padding: 10px;
   }
   .screen-interface {
-    padding: 20px 24px 14px;
+    padding: 20px 24px 24px;
   }
   .home-directory {
     gap: 22px;
@@ -1535,7 +1535,7 @@ small {
     border-radius: 40% / 3%;
   }
   .screen-interface {
-    padding: 24px 16px 16px;
+    padding: 24px 16px 22px;
   }
   .screen-viewport {
     padding-right: 0;
@@ -1807,7 +1807,7 @@ small {
   }
   .screen-interface {
     padding-top: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
   }
   .screen-bottom {
     display: none;
