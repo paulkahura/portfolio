@@ -654,6 +654,18 @@ small {
   color: #71977a;
   padding-top: 7px;
 }
+.intention-signoff {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.intention-signoff img {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  filter: invert(76%) sepia(12%) saturate(821%) hue-rotate(79deg) brightness(93%);
+}
 .command-feedback {
   font-size: 11px;
   margin: 0 0 4px;

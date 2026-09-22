@@ -423,7 +423,14 @@ export function MainContent() {
                       <span className="muted">/</span> {projects.length}{" "}
                       FEATURED PROJECTS
                     </span>
-                    <span>MADE WITH INTENTION.</span>
+                    <span className="intention-signoff">
+                      <span>MADE WITH INTENTION</span>
+                      <span className="muted">/</span>
+                      <img
+                        src={`${import.meta.env.BASE_URL}intention-mark.png`}
+                        alt=""
+                      />
+                    </span>
                   </div>
                 </footer>
               </div>
