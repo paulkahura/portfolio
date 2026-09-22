@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://koimburi.dev/</loc></url>
+  <url><loc>https://koimburi.dev/?section=about</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=contrast-tivtav</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=repsafe</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=blue-box-ai</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=zuka-safari</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=socio</loc></url>
+  <url><loc>https://koimburi.dev/?section=projects&amp;project=mug-sacco</loc></url>
+  <url><loc>https://koimburi.dev/?section=experience</loc></url>
+  <url><loc>https://koimburi.dev/?section=resume</loc></url>
+  <url><loc>https://koimburi.dev/?section=contact</loc></url>
+  <url><loc>https://koimburi.dev/?section=writing</loc></url>
+  <url><loc>https://koimburi.dev/blog/ivr-system-architecture</loc></url>
+  <url><loc>https://koimburi.dev/blog/iot-sustainability</loc></url>
+  <url><loc>https://koimburi.dev/blog/crisis-ai-sentiment</loc></url>
+  <url><loc>https://koimburi.dev/blog/building-access-control</loc></url>
+  <url><loc>https://koimburi.dev/blog/nextjs-performance</loc></url>
+</urlset>

@@ -22,6 +22,7 @@ import type { Section } from "../data/portfolio";
 import { PortfolioSection } from "./PortfolioSection";
 import { CrtLens } from "./CrtLens";
 import { AnimatedIntro } from "./AnimatedIntro";
+import { SeoMeta } from "./SeoMeta";
 import { arcadeGames } from "../data/arcade";
 import type { ArcadeGame } from "../data/arcade";
 
@@ -123,7 +124,6 @@ export function MainContent() {
     window.scrollTo(0, 0);
     if (!firstLoad.current) heading.current?.focus({ preventScroll: true });
     firstLoad.current = false;
-    document.title = `${project?.name || post?.title || (section ? labels[section] : "Software Engineer")} | Koimburi`;
   }, [location.key, project?.name, post?.title, section]);
 
   const go = (value?: Section) => {
@@ -216,6 +216,7 @@ export function MainContent() {
 
   return (
     <div className="workstation">
+      <SeoMeta section={section} project={project} post={post} />
       <CrtLens />
       <a className="skip-link" href="#screen-content">
         Skip to content
