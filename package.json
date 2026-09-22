@@ -23,6 +23,7 @@
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.24",
     "lucide-react": "^0.554.0",
+    "minesweeper": "^1.0.5",
     "postcss": "^8.5.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

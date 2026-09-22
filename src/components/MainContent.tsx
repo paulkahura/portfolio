@@ -126,7 +126,7 @@ export function MainContent() {
     }
     if (value === "help" || value === "?") {
       setFeedback(
-        "Navigation: about, projects, experience, resume, contact, writing, games. System: dir, whoami, status, date, time, home, back. Arcade: play snake, play signal, play quiz.",
+        "Navigation: about, projects, experience, resume, contact, writing, games. System: dir, whoami, status, date, time, home, back. Arcade: play snake, play signal, play mines.",
       );
       return;
     }

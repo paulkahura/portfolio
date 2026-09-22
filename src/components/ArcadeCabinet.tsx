@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Play, RotateCcw } from "lucide-react";
+import minesweeper from "minesweeper";
 import { arcadeGames, gameLabels } from "../data/arcade";
 import type { ArcadeGame } from "../data/arcade";
 import { SnakeGame } from "./SnakeGame";
@@ -84,99 +85,88 @@ function SignalTap() {
   );
 }
 
-const questions = [
-  {
-    prompt: "Which project turns supplier invoices into analytics?",
-    answers: ["Socio", "Contrast / TIVTAV", "Zuka Safari"],
-    correct: 1,
-  },
-  {
-    prompt: "Which build helps people move through Nairobi?",
-    answers: ["Repsafe", "Blue Box AI", "Zuka Safari"],
-    correct: 2,
-  },
-  {
-    prompt: "Which project makes camera events queryable?",
-    answers: ["Blue Box AI", "FarmBetter IVR", "Payola"],
-    correct: 0,
-  },
-];
+const mineConfig = { rows: 9, cols: 9, mines: 10 };
 
-function BuildQuiz() {
-  const [index, setIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [answer, setAnswer] = useState<number | null>(null);
-  const question = questions[index];
-  const complete = index === questions.length;
+function createMineBoard() {
+  return new minesweeper.Board(minesweeper.generateMineArray(mineConfig));
+}
 
-  function choose(choice: number) {
-    if (answer !== null) return;
-    setAnswer(choice);
-    if (choice === question.correct) setScore((value) => value + 1);
-  }
+function Minesweep() {
+  const [board, setBoard] = useState(createMineBoard);
+  const [revision, setRevision] = useState(0);
+  const grid = board.grid();
+  const flags = grid.flat().filter((cell) => cell.flag === minesweeper.CellFlagEnum.EXCLAMATION).length;
+  const boardState = board.state();
+  const lost = boardState === minesweeper.BoardStateEnum.LOST;
+  const won = boardState === minesweeper.BoardStateEnum.WON;
 
-  function next() {
-    setIndex((value) => value + 1);
-    setAnswer(null);
-  }
-
-  function reset() {
-    setIndex(0);
-    setScore(0);
-    setAnswer(null);
+  function update(action: () => void) {
+    action();
+    setRevision((value) => value + 1);
   }
 
   return (
-    <div className="arcade mini-game quiz-game">
+    <div className="arcade mini-game minesweep-game">
       <div className="arcade-bar">
-        <span>BUILD QUIZ / 03</span>
-        <span className="muted">{complete ? "COMPLETE" : `QUESTION ${index + 1} / ${questions.length}`}</span>
+        <span>MINESWEEP / 03</span>
+        <span className="muted">{won ? "BOARD CLEARED" : lost ? "MINE HIT" : "CLEAR THE FIELD"}</span>
       </div>
-      <div className="quiz-panel">
-        {complete ? (
-          <>
-            <p className="quiz-prompt">RESULT: {score} / {questions.length}</p>
-            <p className="muted">{score === questions.length ? "Archive access granted. You know the work." : "A quick tour of the projects might help."}</p>
-          </>
-        ) : (
-          <>
-            <p className="quiz-prompt">{question.prompt}</p>
-            <div className="quiz-options">
-              {question.answers.map((item, optionIndex) => (
-                <button
-                  key={item}
-                  onClick={() => choose(optionIndex)}
-                  className={
-                    answer === null
-                      ? ""
-                      : optionIndex === question.correct
-                        ? "correct"
-                        : optionIndex === answer
-                          ? "incorrect"
-                          : ""
+      <div className="mine-stage">
+        <div className="mine-grid" role="grid" aria-label="Minesweeper board" data-revision={revision}>
+          {grid.flat().map((cell) => {
+            const open = cell.state === minesweeper.CellStateEnum.OPEN;
+            const flagged = cell.flag === minesweeper.CellFlagEnum.EXCLAMATION;
+            const questioned = cell.flag === minesweeper.CellFlagEnum.QUESTION;
+            const content = open
+              ? cell.isMine
+                ? "*"
+                : cell.numAdjacentMines || ""
+              : flagged
+                ? "!"
+                : questioned
+                  ? "?"
+                  : "";
+            const label = open
+              ? cell.isMine
+                ? `Mine at row ${cell.y + 1}, column ${cell.x + 1}`
+                : `Open cell at row ${cell.y + 1}, column ${cell.x + 1}; ${cell.numAdjacentMines} adjacent mines`
+              : `${flagged ? "Flagged" : "Closed"} cell at row ${cell.y + 1}, column ${cell.x + 1}. Click to open; right-click or Shift+Enter to flag.`;
+            return (
+              <button
+                key={`${cell.x}-${cell.y}`}
+                className={`mine-cell ${open ? "open" : "closed"} ${cell.isMine && open ? "mine" : ""}`}
+                role="gridcell"
+                aria-label={label}
+                disabled={open || won || lost}
+                onClick={() => update(() => board.openCell(cell.x, cell.y))}
+                onContextMenu={(event) => {
+                  event.preventDefault();
+                  update(() => board.cycleCellFlag(cell.x, cell.y));
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" && event.shiftKey) {
+                    event.preventDefault();
+                    update(() => board.cycleCellFlag(cell.x, cell.y));
                   }
-                  disabled={answer !== null}
-                >
-                  <span>[{String(optionIndex + 1).padStart(2, "0")}]</span> {item}
-                </button>
-              ))}
-            </div>
-          </>
-        )}
+                }}
+              >
+                {content}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <div className="game-controls compact-controls">
-        {complete ? (
-          <button className="solid-link" onClick={reset}>
-            <RotateCcw size={16} /> Run again
-          </button>
-        ) : answer !== null ? (
-          <button className="solid-link" onClick={next}>
-            {index === questions.length - 1 ? "See result" : "Next question"}
-          </button>
-        ) : (
-          <span>SELECT ONE ANSWER</span>
-        )}
-        <span>SCORE {String(score).padStart(2, "0")}</span>
+        <button
+          className="solid-link"
+          onClick={() => {
+            setBoard(createMineBoard());
+            setRevision(0);
+          }}
+        >
+          <RotateCcw size={16} /> New field
+        </button>
+        <span>MINES {String(mineConfig.mines - flags).padStart(2, "0")} / RIGHT-CLICK TO FLAG</span>
       </div>
     </div>
   );
@@ -199,7 +189,7 @@ export function ArcadeCabinet({ game = "snake" }: { game?: ArcadeGame }) {
       </nav>
       {game === "snake" && <SnakeGame />}
       {game === "signal" && <SignalTap />}
-      {game === "quiz" && <BuildQuiz />}
+      {game === "mines" && <Minesweep />}
     </div>
   );
 }
