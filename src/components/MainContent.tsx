@@ -77,6 +77,7 @@ export function MainContent() {
   const [feedback, setFeedback] = useState("");
   const [scanlines, setScanlines] = useState(true);
   const [powered, setPowered] = useState(true);
+  const [glitching, setGlitching] = useState(false);
   const [booting, setBooting] = useState(
     () => !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
   );
@@ -88,6 +89,30 @@ export function MainContent() {
     const timer = window.setTimeout(() => setBooting(false), 1100);
     return () => window.clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let glitchTimer: number | undefined;
+    let clearTimer: number | undefined;
+
+    const scheduleGlitch = () => {
+      const delay = 16_000 + Math.random() * 28_000;
+      glitchTimer = window.setTimeout(() => {
+        if (!document.hidden && powered) {
+          setGlitching(true);
+          clearTimer = window.setTimeout(() => setGlitching(false), 360);
+        }
+        scheduleGlitch();
+      }, delay);
+    };
+
+    scheduleGlitch();
+    return () => {
+      window.clearTimeout(glitchTimer);
+      window.clearTimeout(clearTimer);
+    };
+  }, [powered]);
 
   useEffect(() => {
     viewport.current?.scrollTo(0, 0);
@@ -202,7 +227,9 @@ export function MainContent() {
       </header>
       <main className="monitor" aria-label="Koimburi portfolio">
         <div className={`screen-bezel ${!powered ? "is-asleep" : ""}`}>
-          <div className={`crt-glass ${scanlines ? "has-scanlines" : ""}`}>
+          <div
+            className={`crt-glass ${scanlines ? "has-scanlines" : ""} ${glitching ? "is-glitching" : ""}`}
+          >
             {powered ? (
               <div className="screen-interface">
                 <header className="system-bar">
