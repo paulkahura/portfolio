@@ -1,10 +1,165 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Play, RotateCcw } from "lucide-react";
+import type { KeyboardEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowLeft, ArrowRight, ExternalLink, Play, RotateCcw } from "lucide-react";
 import minesweeper from "minesweeper";
 import { arcadeGames, gameLabels } from "../data/arcade";
 import type { ArcadeGame } from "../data/arcade";
 import { SnakeGame } from "./SnakeGame";
+import { projects } from "../data/portfolio";
+import {
+  completeGrab,
+  createClawState,
+  moveClaw,
+  selectClawProject,
+  startGrab,
+} from "../games/claw";
+
+const clawDelayMs = 620;
+
+function PortfolioClaw() {
+  const navigate = useNavigate();
+  const [claw, setClaw] = useState(createClawState);
+  const grabTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const selectedProject = projects[claw.selectedIndex];
+  const capturedProject =
+    claw.capturedIndex === null ? undefined : projects[claw.capturedIndex];
+  const clawLeft = `${((claw.selectedIndex % 3) + 0.5) * (100 / 3)}%`;
+
+  useEffect(
+    () => () => {
+      if (grabTimer.current) clearTimeout(grabTimer.current);
+    },
+    [],
+  );
+
+  function move(direction: -1 | 1) {
+    setClaw((state) => moveClaw(state, direction, projects.length));
+  }
+
+  function choose(index: number) {
+    setClaw((state) => selectClawProject(state, index, projects.length));
+  }
+
+  function grab() {
+    if (claw.phase !== "ready") return;
+    setClaw((state) => startGrab(state));
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (reducedMotion) {
+      setClaw((state) => completeGrab(state));
+      return;
+    }
+    grabTimer.current = setTimeout(() => {
+      setClaw((state) => completeGrab(state));
+    }, clawDelayMs);
+  }
+
+  function handleKeys(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      move(-1);
+    } else if (event.key === "ArrowRight") {
+      event.preventDefault();
+      move(1);
+    } else if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      grab();
+    }
+  }
+
+  const status =
+    claw.phase === "grabbing"
+      ? `Grabbing ${selectedProject.name}.`
+      : capturedProject
+        ? `${capturedProject.name} captured. Open its project page when ready.`
+        : `${selectedProject.name} aligned in the claw lane.`;
+
+  return (
+    <div className="arcade claw-game">
+      <div className="arcade-bar">
+        <span>PORTFOLIO CLAW / 04</span>
+        <span className="muted">{capturedProject ? "PRIZE READY" : "SELECT A PROJECT"}</span>
+      </div>
+      <div
+        className={`claw-stage is-${claw.phase}`}
+        tabIndex={0}
+        onKeyDown={handleKeys}
+        aria-label="Portfolio Claw game. Select a project, then grab it."
+      >
+        <span className="sr-only" aria-live="polite">
+          {status}
+        </span>
+        <div className="claw-rail" aria-hidden="true">
+          <div className="claw-carriage" style={{ left: clawLeft }}>
+            <span className="claw-cable" />
+            <span className="claw-head">
+              <i />
+              <i />
+              <i />
+            </span>
+          </div>
+        </div>
+        <div className="claw-prize-bay" role="listbox" aria-label="Featured project prizes">
+          {projects.map((project, index) => (
+            <button
+              key={project.id}
+              type="button"
+              role="option"
+              aria-selected={index === claw.selectedIndex}
+              className={`project-capsule ${index === claw.selectedIndex ? "is-selected" : ""} ${index === claw.capturedIndex ? "is-captured" : ""}`}
+              onClick={() => choose(index)}
+              disabled={claw.phase === "grabbing"}
+            >
+              <span>{project.name}</span>
+              <small>{project.category.split(" / ")[0]}</small>
+            </button>
+          ))}
+        </div>
+        <div className="claw-chute" aria-live="polite">
+          <span>PROJECT EXIT</span>
+          {capturedProject ? (
+            <button
+              className="captured-project"
+              type="button"
+              onClick={() =>
+                navigate(`/?section=projects&project=${capturedProject.id}`)
+              }
+            >
+              <span>{capturedProject.name}</span>
+              <ExternalLink size={14} />
+            </button>
+          ) : (
+            <span className="chute-empty">AWAITING GRAB</span>
+          )}
+        </div>
+      </div>
+      <div className="game-controls claw-controls">
+        <div className="direction-pad" aria-label="Claw movement controls">
+          <button className="icon-button" type="button" onClick={() => move(-1)} title="Move claw left" aria-label="Move claw left">
+            <ArrowLeft size={18} />
+          </button>
+          <button className="icon-button" type="button" onClick={() => move(1)} title="Move claw right" aria-label="Move claw right">
+            <ArrowRight size={18} />
+          </button>
+        </div>
+        <button className="solid-link claw-grab" type="button" onClick={grab} disabled={claw.phase !== "ready"}>
+          <Play size={16} /> <span>Grab</span> <span className="claw-grab-project">{selectedProject.name}</span>
+        </button>
+        <button
+          className="icon-button"
+          type="button"
+          onClick={() => setClaw(createClawState())}
+          title="Reset claw"
+          aria-label="Reset claw"
+        >
+          <RotateCcw size={16} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function SignalTap() {
   const [state, setState] = useState<"ready" | "waiting" | "go" | "early">(
@@ -190,6 +345,7 @@ export function ArcadeCabinet({ game = "snake" }: { game?: ArcadeGame }) {
       {game === "snake" && <SnakeGame />}
       {game === "signal" && <SignalTap />}
       {game === "mines" && <Minesweep />}
+      {game === "claw" && <PortfolioClaw />}
     </div>
   );
 }
