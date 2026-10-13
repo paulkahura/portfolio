@@ -226,9 +226,7 @@ export function MainContent() {
           <span className="tiny-cross">+</span> KOIMBURI / PERSONAL
           WORKSTATION
         </span>
-        <span>
-          NAIROBI, KE <span className="desk-dot" />
-        </span>
+        <a href={import.meta.env.BASE_URL}>MAIN PORTFOLIO ↗</a>
       </header>
       <main className="monitor" aria-label="Koimburi portfolio">
         <div className={`screen-bezel ${!powered ? "is-asleep" : ""}`}>
