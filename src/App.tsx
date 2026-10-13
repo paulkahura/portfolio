@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MainContent } from "./components/MainContent";
 import { EditorialPortfolio } from "./components/EditorialPortfolio";
 import "./editorial.css";
+import "./showcase.css";
 
 export default function App() {
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");

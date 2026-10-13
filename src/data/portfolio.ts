@@ -86,7 +86,7 @@ export const projects: Project[] = [
   },
   {
     id: "repsafe",
-    name: "Repsafe",
+    name: "FirstHour.ai",
     audience: "Crisis communication teams and their reviewers",
     challenge:
       "During a crisis, information changes quickly and several people need to agree on what happens next. Drafting a statement is only one part of the problem: context, responsibilities, versions, and approvals all need a shared home.",
@@ -114,10 +114,10 @@ export const projects: Project[] = [
     takeaway:
       "Teams can move from understanding a situation to preparing and reviewing a response without treating every document as an isolated task.",
     category: "AI / COMMUNICATIONS",
-    summary: "An AI workspace for teams handling crisis communications.",
+    summary: "An AI workspace for crisis communications. Previously Repsafe.",
     role: "AI crisis-platform engineering / Elewa",
     description:
-      "A collaborative crisis communication platform that helps teams coordinate a response, draft communications with AI, and move content through structured approvals.",
+      "FirstHour.ai, previously Repsafe, is a collaborative crisis communication platform that helps teams coordinate a response, draft communications with AI, and move content through structured approvals.",
     capabilities: [
       "A situation room for crisis context and team coordination.",
       "AI-assisted key messages, press statements, and internal briefings.",
@@ -133,9 +133,9 @@ export const projects: Project[] = [
       "AI workflows",
     ],
     image: {
-      path: "projects/repsafe.png",
-      alt: "Repsafe product logo",
-      caption: "Repsafe / product identity",
+      path: "projects/showcase/firsthour-website.png",
+      alt: "FirstHour.ai public website and product preview",
+      caption: "FirstHour.ai / public website, October 2026",
     },
   },
   {
@@ -434,6 +434,8 @@ export const otherProjects: OtherProject[] = [
 
 export const contact = {
   email: "paulkoimbori@gmail.com",
+  phone: "+254706298652",
+  phoneLabel: "+254 706 298 652",
   github: "https://github.com/paulkahura",
   linkedin: "https://www.linkedin.com/in/paul-kahura/",
 };

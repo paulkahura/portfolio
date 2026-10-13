@@ -122,3 +122,6 @@ dist
 # Vite
 dist
 .wrangler
+
+# Local-only render harnesses and review captures
+tmp/
